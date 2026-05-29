@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react'
+import { ChevronLeft, ChevronRight, RotateCcw, Sparkles } from 'lucide-react'
 import Stepper from './components/Stepper.jsx'
 import Step1Identification from './components/steps/Step1Identification.jsx'
 import Step2FormatIntention from './components/steps/Step2FormatIntention.jsx'
@@ -35,7 +35,7 @@ function validateStep(step, data) {
 }
 
 export default function App() {
-  const { data, handleChange, resetData } = useFormData()
+  const { data, handleChange, resetData, fillDemo } = useFormData()
   const [step, setStep] = useState(1)
   const [errors, setErrors] = useState([])
   const [showReset, setShowReset] = useState(false)
@@ -83,14 +83,24 @@ export default function App() {
               <p className="text-xs font-medium text-slate-500">CPME Rhône · Programme 2026-2027</p>
             </div>
           </div>
-          <button
-            onClick={() => setShowReset(true)}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-            title="Réinitialiser le formulaire"
-          >
-            <RotateCcw size={14} />
-            <span className="hidden sm:inline">Réinitialiser</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => { fillDemo(); setStep(1); setErrors([]) }}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-amber-600 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors"
+              title="Remplir avec un exemple"
+            >
+              <Sparkles size={14} />
+              <span className="hidden sm:inline">Démo</span>
+            </button>
+            <button
+              onClick={() => setShowReset(true)}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              title="Réinitialiser le formulaire"
+            >
+              <RotateCcw size={14} />
+              <span className="hidden sm:inline">Réinitialiser</span>
+            </button>
+          </div>
         </div>
         {/* Stepper */}
         <div className="max-w-4xl mx-auto px-4 md:px-6 pb-4 pt-2">
