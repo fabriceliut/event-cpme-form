@@ -1,0 +1,89 @@
+import { Users } from 'lucide-react'
+import { FormGroup, Input, RadioCard, Checkbox, SectionCard } from '../ui/index.jsx'
+
+const FONCTIONS = ['Réseauter', 'Mettre en avant', 'Travailler', 'Défendre & Représenter']
+
+export default function Step3CibleCadre({ data, onChange }) {
+  return (
+    <SectionCard number="3" title="Cible &amp; Cadre CPME">
+      {/* Q4 */}
+      <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100">
+        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
+          <Users size={16} className="text-cpme-lightblue" />
+          Q4. Qui doit être présent et combien ?
+        </h3>
+        <p className="text-xs text-slate-500 mb-4">Profil dirigeant, effectif cible, ratio adhérents / non-adhérents</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <FormGroup label="Profil dirigeant">
+            <Input name="profil" value={data.profil} onChange={onChange} placeholder="Ex : PME Industrielles" />
+          </FormGroup>
+          <FormGroup label="Effectif cible (min)">
+            <Input name="effectif" type="number" min="0" value={data.effectif} onChange={onChange} placeholder="Ex : 30" />
+          </FormGroup>
+          <FormGroup label="Ratio Adhérents / Non-adhérents">
+            <div className="flex items-center gap-2">
+              <Input name="ratioAdherents" type="number" min="0" max="100" value={data.ratioAdherents} onChange={onChange} placeholder="80" className="text-center" />
+              <span className="text-slate-400 font-bold text-sm flex-shrink-0">% /</span>
+              <Input name="ratioNonAdherents" type="number" min="0" max="100" value={data.ratioNonAdherents} onChange={onChange} placeholder="20" className="text-center" />
+              <span className="text-slate-400 font-bold text-sm flex-shrink-0">%</span>
+            </div>
+          </FormGroup>
+        </div>
+      </div>
+
+      {/* Q5 */}
+      <FormGroup
+        label="Q5. Fonction principale de l'action"
+        required
+        hint="Une seule principale — secondaire facultative"
+      >
+        <div className="grid grid-cols-2 gap-3 mt-1">
+          {FONCTIONS.map(f => (
+            <RadioCard
+              key={f}
+              name="fonctionPrincipale"
+              value={f}
+              checked={data.fonctionPrincipale === f}
+              onChange={onChange}
+              label={f}
+            />
+          ))}
+        </div>
+        <div className="mt-3">
+          <FormGroup label="Fonction secondaire (optionnel)">
+            <div className="flex flex-wrap gap-2">
+              {FONCTIONS.filter(f => f !== data.fonctionPrincipale).map(f => (
+                <label key={f}
+                  className={`px-3 py-1.5 border rounded-lg text-xs font-semibold cursor-pointer transition-all
+                    ${data.fonctionSecondaire === f
+                      ? 'bg-slate-600 text-white border-slate-600'
+                      : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'
+                    }`}
+                >
+                  <input type="radio" name="fonctionSecondaire" value={f} checked={data.fonctionSecondaire === f} onChange={onChange} className="hidden" />
+                  {f}
+                </label>
+              ))}
+              {data.fonctionSecondaire && (
+                <button type="button" onClick={() => onChange({ target: { name: 'fonctionSecondaire', value: '' } })}
+                  className="px-3 py-1.5 border rounded-lg text-xs font-semibold text-slate-400 border-dashed border-slate-300 hover:text-slate-600 transition-colors"
+                >
+                  Aucune
+                </button>
+              )}
+            </div>
+          </FormGroup>
+        </div>
+      </FormGroup>
+
+      {/* Q6 */}
+      <FormGroup label="Q6. Pilier CPME servi" required hint="Au moins un">
+        <div className="flex flex-col gap-2 mt-1">
+          <Checkbox name="pilierDefendre" checked={data.pilierDefendre} onChange={onChange} label="Défendre la voix des patrons" />
+          <Checkbox name="pilierGrandir" checked={data.pilierGrandir} onChange={onChange} label="Faire grandir les dirigeants" />
+          <Checkbox name="pilierAider" checked={data.pilierAider} onChange={onChange} label="Aider les entreprises" />
+        </div>
+      </FormGroup>
+    </SectionCard>
+  )
+}

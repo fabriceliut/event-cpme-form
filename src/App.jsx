@@ -1,0 +1,177 @@
+import { useState } from 'react'
+import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react'
+import Stepper from './components/Stepper.jsx'
+import Step1Identification from './components/steps/Step1Identification.jsx'
+import Step2FormatIntention from './components/steps/Step2FormatIntention.jsx'
+import Step3CibleCadre from './components/steps/Step3CibleCadre.jsx'
+import Step4ChargeRessources from './components/steps/Step4ChargeRessources.jsx'
+import Step5MesureSucces from './components/steps/Step5MesureSucces.jsx'
+import Step6Orientations from './components/steps/Step6Orientations.jsx'
+import Step7Validation from './components/steps/Step7Validation.jsx'
+import StepReview from './components/steps/StepReview.jsx'
+import { useFormData } from './hooks/useFormData.js'
+
+const TOTAL_STEPS = 8
+
+function validateStep(step, data) {
+  const errors = []
+  if (step === 1) {
+    if (!data.intitule?.trim()) errors.push("L'intitulé de l'action est requis.")
+    if (!data.porteur?.trim()) errors.push('Le nom du porteur est requis.')
+    if (!data.cre?.trim()) errors.push('Le CRE responsable est requis.')
+    if (!data.priorite) errors.push('Le niveau de priorité est requis.')
+  }
+  if (step === 2) {
+    if (!data.format) errors.push('Le format envisagé est requis.')
+    if (!data.besoin?.trim()) errors.push('Le besoin adhérent est requis.')
+  }
+  if (step === 3) {
+    if (!data.fonctionPrincipale) errors.push('La fonction principale est requise.')
+    if (!data.pilierDefendre && !data.pilierGrandir && !data.pilierAider) {
+      errors.push('Au moins un pilier CPME doit être coché.')
+    }
+  }
+  return errors
+}
+
+export default function App() {
+  const { data, handleChange, resetData } = useFormData()
+  const [step, setStep] = useState(1)
+  const [errors, setErrors] = useState([])
+  const [showReset, setShowReset] = useState(false)
+
+  const goNext = () => {
+    const errs = validateStep(step, data)
+    if (errs.length > 0) {
+      setErrors(errs)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+    setErrors([])
+    setStep(s => Math.min(s + 1, TOTAL_STEPS))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const goPrev = () => {
+    setErrors([])
+    setStep(s => Math.max(s - 1, 1))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const STEPS = [
+    <Step1Identification data={data} onChange={handleChange} />,
+    <Step2FormatIntention data={data} onChange={handleChange} />,
+    <Step3CibleCadre data={data} onChange={handleChange} />,
+    <Step4ChargeRessources data={data} onChange={handleChange} />,
+    <Step5MesureSucces data={data} onChange={handleChange} />,
+    <Step6Orientations data={data} onChange={handleChange} />,
+    <Step7Validation data={data} onChange={handleChange} />,
+    <StepReview data={data} />,
+  ]
+
+  return (
+    <div className="min-h-screen pb-32">
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-cpme-blue rounded-xl flex items-center justify-center text-white font-black text-lg select-none flex-shrink-0">
+              C
+            </div>
+            <div>
+              <h1 className="text-lg font-black text-slate-900 leading-tight">Fiche Action / Événement</h1>
+              <p className="text-xs font-medium text-slate-500">CPME Rhône · Programme 2026-2027</p>
+            </div>
+          </div>
+          <button
+            onClick={() => setShowReset(true)}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+            title="Réinitialiser le formulaire"
+          >
+            <RotateCcw size={14} />
+            <span className="hidden sm:inline">Réinitialiser</span>
+          </button>
+        </div>
+        {/* Stepper */}
+        <div className="max-w-4xl mx-auto px-4 md:px-6 pb-4 pt-2">
+          <Stepper current={step} />
+        </div>
+      </header>
+
+      {/* Contenu */}
+      <main className="max-w-4xl mx-auto px-4 md:px-6 mt-8">
+        {/* Erreurs de validation */}
+        {errors.length > 0 && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+            <p className="text-sm font-bold text-red-700 mb-2">Veuillez compléter les champs obligatoires :</p>
+            <ul className="space-y-1">
+              {errors.map((e, i) => (
+                <li key={i} className="text-sm text-red-600 flex items-start gap-2">
+                  <span className="text-red-400 mt-0.5">•</span> {e}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <form onSubmit={e => e.preventDefault()}>
+          {STEPS[step - 1]}
+        </form>
+      </main>
+
+      {/* Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-lg z-30">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between gap-4">
+          <button
+            onClick={goPrev}
+            disabled={step === 1}
+            className="flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          >
+            <ChevronLeft size={18} />
+            Précédent
+          </button>
+
+          <span className="text-xs font-semibold text-slate-400">
+            Étape {step} sur {TOTAL_STEPS}
+          </span>
+
+          {step < TOTAL_STEPS ? (
+            <button
+              onClick={goNext}
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm bg-cpme-blue text-white hover:bg-cpme-lightblue shadow-md shadow-cpme-blue/20 hover:-translate-y-0.5 transition-all"
+            >
+              Suivant
+              <ChevronRight size={18} />
+            </button>
+          ) : (
+            <div className="w-32" /> // placeholder pour garder l'alignement sur la dernière étape
+          )}
+        </div>
+      </div>
+
+      {/* Modal confirmation reset */}
+      {showReset && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+            <h3 className="text-lg font-bold text-slate-800 mb-2">Réinitialiser le formulaire ?</h3>
+            <p className="text-sm text-slate-500 mb-6">Toutes les données saisies seront effacées définitivement.</p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowReset(false)}
+                className="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={() => { resetData(); setStep(1); setErrors([]); setShowReset(false) }}
+                className="flex-1 px-4 py-2.5 bg-cpme-red rounded-xl text-sm font-bold text-white hover:opacity-90 transition-opacity"
+              >
+                Réinitialiser
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
