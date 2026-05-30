@@ -11,19 +11,24 @@ const STEPS = [
   { number: 8, label: 'PDF' },
 ]
 
-export default function Stepper({ current }) {
+export default function Stepper({ current, onStepClick }) {
   return (
     <div className="w-full overflow-x-auto">
       <div className="flex items-center min-w-max px-4 md:px-0">
         {STEPS.map((step, idx) => {
           const isCompleted = step.number < current
           const isActive = step.number === current
+          const isClickable = isCompleted && onStepClick
           return (
             <div key={step.number} className="flex items-center">
               {/* Step indicator */}
-              <div className="flex flex-col items-center gap-1">
+              <div
+                className={`flex flex-col items-center gap-1 ${isClickable ? 'cursor-pointer group' : ''}`}
+                onClick={() => isClickable && onStepClick(step.number)}
+              >
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all
                   ${isCompleted ? 'bg-cpme-lightblue text-white' : ''}
+                  ${isCompleted && isClickable ? 'group-hover:bg-cpme-blue group-hover:scale-110' : ''}
                   ${isActive ? 'bg-cpme-blue text-white ring-4 ring-cpme-blue/20' : ''}
                   ${!isCompleted && !isActive ? 'bg-slate-200 text-slate-400' : ''}
                 `}>
@@ -34,6 +39,7 @@ export default function Stepper({ current }) {
                 </div>
                 <span className={`text-[10px] font-semibold whitespace-nowrap transition-colors
                   ${isActive ? 'text-cpme-blue' : isCompleted ? 'text-cpme-lightblue' : 'text-slate-400'}
+                  ${isCompleted && isClickable ? 'group-hover:text-cpme-blue' : ''}
                 `}>
                   {step.label}
                 </span>

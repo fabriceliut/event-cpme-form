@@ -121,7 +121,7 @@ export default function App() {
         </div>
         {/* Stepper */}
         <div className="max-w-4xl mx-auto px-4 md:px-6 pb-4 pt-2">
-          <Stepper current={step} />
+          <Stepper current={step} onStepClick={(n) => { setStep(n); setErrors([]); setShowErrors(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }} />
         </div>
       </header>
 
