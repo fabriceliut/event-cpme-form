@@ -17,19 +17,32 @@ function validateStep(step, data) {
   const errors = []
   if (step === 1) {
     if (!data.intitule?.trim()) errors.push("L'intitulé de l'action est requis.")
+    if (!data.pole?.trim()) errors.push('Le pôle / club porteur est requis.')
     if (!data.porteur?.trim()) errors.push('Le nom du porteur est requis.')
     if (!data.cre?.trim()) errors.push('Le CRE responsable est requis.')
+    if (!data.date?.trim()) errors.push('La date / période envisagée est requise.')
+    if (!data.lieu?.trim()) errors.push('Le lieu envisagé est requis.')
     if (!data.priorite) errors.push('Le niveau de priorité est requis.')
   }
   if (step === 2) {
     if (!data.format) errors.push('Le format envisagé est requis.')
+    if (data.format === 'Autre' && !data.formatAutre?.trim()) errors.push('Précisez le format.')
     if (!data.besoin?.trim()) errors.push('Le besoin adhérent est requis.')
+    if (!data.repartAvec?.trim()) errors.push('Le champ "ce avec quoi on repart" est requis.')
   }
   if (step === 3) {
+    if (!data.profil?.trim()) errors.push('Le profil dirigeant est requis.')
+    if (!data.effectif) errors.push("L'effectif cible est requis.")
+    if (data.ratioAdherents === '' || data.ratioAdherents === null) errors.push('Le ratio adhérents est requis.')
     if (!data.fonctionPrincipale) errors.push('La fonction principale est requise.')
     if (!data.pilierDefendre && !data.pilierGrandir && !data.pilierAider) {
       errors.push('Au moins un pilier CPME doit être coché.')
     }
+  }
+  if (step === 7) {
+    if (!data.valPorteurNom?.trim()) errors.push('Le nom du porteur / président est requis.')
+    if (!data.valCreNom?.trim()) errors.push('Le nom du CRE est requis.')
+    if (!data.valSignatureDate) errors.push('La date de signature est requise.')
   }
   return errors
 }
@@ -77,7 +90,7 @@ export default function App() {
     <Step4ChargeRessources data={data} onChange={handleChange} />,
     <Step5MesureSucces data={data} onChange={handleChange} />,
     <Step6Orientations data={data} onChange={handleChange} />,
-    <Step7Validation data={data} onChange={handleChange} />,
+    <Step7Validation data={data} onChange={handleChange} showErrors={showErrors} />,
     <StepReview data={data} />,
   ]
 

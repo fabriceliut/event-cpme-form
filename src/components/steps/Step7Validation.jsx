@@ -1,6 +1,6 @@
 import { FormGroup, Input, SectionCard } from '../ui/index.jsx'
 
-export default function Step7Validation({ data, onChange }) {
+export default function Step7Validation({ data, onChange, showErrors = false }) {
   return (
     <SectionCard number="7" title="Validation">
       <p className="text-sm text-slate-500 -mt-2">
@@ -11,23 +11,23 @@ export default function Step7Validation({ data, onChange }) {
         {/* Porteur / Président */}
         <div className="p-4 bg-white border-2 border-slate-100 rounded-xl space-y-3">
           <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Porteur·euse / Président·e de club</h4>
-          <FormGroup label="Nom et prénom">
-            <Input name="valPorteurNom" value={data.valPorteurNom} onChange={onChange} placeholder="Nom et prénom" />
+          <FormGroup label="Nom et prénom" required>
+            <Input name="valPorteurNom" value={data.valPorteurNom} onChange={onChange} placeholder="Nom et prénom" error={showErrors && !data.valPorteurNom?.trim()} />
           </FormGroup>
         </div>
 
         {/* CRE */}
         <div className="p-4 bg-white border-2 border-slate-100 rounded-xl space-y-3">
           <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">CRE Responsable</h4>
-          <FormGroup label="Nom et prénom">
-            <Input name="valCreNom" value={data.valCreNom} onChange={onChange} placeholder="Nom et prénom" />
+          <FormGroup label="Nom et prénom" required>
+            <Input name="valCreNom" value={data.valCreNom} onChange={onChange} placeholder="Nom et prénom" error={showErrors && !data.valCreNom?.trim()} />
           </FormGroup>
         </div>
       </div>
 
       <div className="mt-4">
-        <FormGroup label="Date de signature">
-          <Input type="date" name="valSignatureDate" value={data.valSignatureDate} onChange={onChange} />
+        <FormGroup label="Date de signature" required>
+          <Input type="date" name="valSignatureDate" value={data.valSignatureDate} onChange={onChange} error={showErrors && !data.valSignatureDate} />
         </FormGroup>
       </div>
 

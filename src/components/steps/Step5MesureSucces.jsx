@@ -31,22 +31,22 @@ export default function Step5MesureSucces({ data, onChange }) {
         </h3>
         <div className="space-y-3">
           <div className="flex gap-3 items-end">
-            <FormGroup label="Indicateur 1" className="flex-1">
+            <FormGroup label="Indicateur 1" className="flex-1" style={{ minWidth: 0 }}>
               <Input name="indSpe1Nom" value={data.indSpe1Nom} onChange={onChange} placeholder="Nom de l'indicateur" />
             </FormGroup>
-            <div className="w-36 flex-shrink-0">
+            <div className="w-28 flex-shrink-0">
               <FormGroup label="Seuil visé">
                 <Input name="indSpe1Seuil" value={data.indSpe1Seuil} onChange={onChange} placeholder="Ex : 85%" />
               </FormGroup>
             </div>
           </div>
           <div className="flex gap-3 items-end">
-            <FormGroup label="Indicateur 2" className="flex-1">
+            <FormGroup label="Indicateur 2" className="flex-1" style={{ minWidth: 0 }}>
               <Input name="indSpe2Nom" value={data.indSpe2Nom} onChange={onChange} placeholder="Nom de l'indicateur" />
             </FormGroup>
-            <div className="w-36 flex-shrink-0">
+            <div className="w-28 flex-shrink-0">
               <FormGroup label="Seuil visé">
-                <Input name="indSpe2Seuil" value={data.indSpe2Seuil} onChange={onChange} placeholder="Ex : > 3/pers." />
+                <Input name="indSpe2Seuil" value={data.indSpe2Seuil} onChange={onChange} placeholder="Ex : > 3" />
               </FormGroup>
             </div>
           </div>

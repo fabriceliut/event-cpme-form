@@ -14,13 +14,13 @@ export default function Step3CibleCadre({ data, onChange, showErrors = false }) 
         </h3>
         <p className="text-xs text-slate-500 mb-4">Profil dirigeant, effectif cible, ratio adhérents / non-adhérents</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <FormGroup label="Profil dirigeant">
-            <Input name="profil" value={data.profil} onChange={onChange} placeholder="Ex : PME Industrielles" />
+          <FormGroup label="Profil dirigeant" required>
+            <Input name="profil" value={data.profil} onChange={onChange} placeholder="Ex : PME Industrielles" error={showErrors && !data.profil?.trim()} />
           </FormGroup>
-          <FormGroup label="Effectif cible (min)">
-            <Input name="effectif" type="number" min="0" value={data.effectif} onChange={onChange} placeholder="Ex : 30" />
+          <FormGroup label="Effectif cible (min)" required>
+            <Input name="effectif" type="number" min="0" value={data.effectif} onChange={onChange} placeholder="Ex : 30" error={showErrors && !data.effectif} />
           </FormGroup>
-          <FormGroup label="Ratio Adhérents %">
+          <FormGroup label="Ratio Adhérents %" required>
             <div className="flex items-center gap-2">
               <Input
                 name="ratioAdherents"
@@ -29,6 +29,7 @@ export default function Step3CibleCadre({ data, onChange, showErrors = false }) 
                 onChange={onChange}
                 placeholder="80"
                 className="text-center"
+                error={showErrors && (data.ratioAdherents === '' || data.ratioAdherents === null)}
               />
               <span className="text-slate-400 font-bold text-sm flex-shrink-0">%</span>
             </div>

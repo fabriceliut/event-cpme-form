@@ -49,6 +49,7 @@ export default function Step2FormatIntention({ data, onChange, showErrors = fals
 
       <FormGroup
         label="Q3. Ce avec quoi le·la participant·e repart"
+        required
         hint="Connaissance, contact, méthode, document, décision, mise en relation — mobilisable sous 30 j"
       >
         <Textarea
@@ -56,6 +57,7 @@ export default function Step2FormatIntention({ data, onChange, showErrors = fals
           value={data.repartAvec}
           onChange={onChange}
           placeholder="Ex : Un carnet de contacts qualifiés, un guide pratique…"
+          error={showErrors && !data.repartAvec?.trim()}
         />
       </FormGroup>
     </SectionCard>
