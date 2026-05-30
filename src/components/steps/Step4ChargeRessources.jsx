@@ -7,6 +7,15 @@ const TEAM = [
   { key: 'Logistique', label: 'Logistique' },
 ]
 
+function SubSection({ title, children }) {
+  return (
+    <div className="pt-4 border-t border-slate-100 space-y-4">
+      <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wide">{title}</h3>
+      {children}
+    </div>
+  )
+}
+
 export default function Step4ChargeRessources({ data, onChange }) {
   return (
     <SectionCard number="4" title="Charge, Ressources &amp; Écosystème">
@@ -71,24 +80,23 @@ export default function Step4ChargeRessources({ data, onChange }) {
         </div>
       </div>
 
-      {/* Coûts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
-        <FormGroup label="Coût direct estimé (€)" hint="Lieu, intervenants, restauration, communication, supports">
-          <Input name="coutTotal" type="number" min="0" value={data.coutTotal} onChange={onChange} placeholder="Ex : 1500" className="font-bold text-cpme-red" />
-        </FormGroup>
-        <FormGroup label="Détail du coût">
-          <Textarea name="coutDetail" value={data.coutDetail} onChange={onChange} placeholder="Ex : Petit-déjeuner d'accueil (300€)…" className="min-h-[80px]" />
-        </FormGroup>
-        <div className="md:col-span-2">
-          <FormGroup label="Besoins matériels" hint="Salle, équipement, logistique">
-            <Textarea name="besoinsMateriels" value={data.besoinsMateriels} onChange={onChange} placeholder="Ex : Sono portable, badges, vidéoprojecteur…" className="min-h-[80px]" />
+      <SubSection title="Coûts &amp; Besoins matériels">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormGroup label="Coût direct estimé (€)" hint="Lieu, intervenants, restauration, communication, supports">
+            <Input name="coutTotal" type="number" min="0" value={data.coutTotal} onChange={onChange} placeholder="Ex : 1500" className="font-bold text-cpme-red" />
           </FormGroup>
+          <FormGroup label="Détail du coût">
+            <Textarea name="coutDetail" value={data.coutDetail} onChange={onChange} placeholder="Ex : Petit-déjeuner d'accueil (300€)…" className="min-h-[80px]" />
+          </FormGroup>
+          <div className="md:col-span-2">
+            <FormGroup label="Besoins matériels" hint="Salle, équipement, logistique">
+              <Textarea name="besoinsMateriels" value={data.besoinsMateriels} onChange={onChange} placeholder="Ex : Sono portable, badges, vidéoprojecteur…" className="min-h-[80px]" />
+            </FormGroup>
+          </div>
         </div>
-      </div>
+      </SubSection>
 
-      {/* Q8 Partenaires */}
-      <div className="pt-4 border-t border-slate-100">
-        <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">Q8. Partenaires &amp; réseaux externes</h3>
+      <SubSection title="Q8. Partenaires &amp; réseaux externes">
 
         <FormGroup label="Co-construction">
           <div className="flex gap-3 mt-1">
@@ -125,7 +133,7 @@ export default function Step4ChargeRessources({ data, onChange }) {
             <Textarea name="ponts" value={data.ponts} onChange={onChange} placeholder="Ex : CCI, pôle de compétitivité, Ruche Industrielle…" className="min-h-[80px]" />
           </FormGroup>
         </div>
-      </div>
+      </SubSection>
     </SectionCard>
   )
 }

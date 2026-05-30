@@ -140,22 +140,20 @@ export default function App() {
 
       {/* Contenu */}
       <main className="max-w-4xl mx-auto px-4 md:px-6 mt-8">
-        {/* Erreurs de validation */}
+        {/* Erreurs de validation — bandeau compact */}
         {errors.length > 0 && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-            <p className="text-sm font-bold text-red-700 mb-2">Veuillez compléter les champs obligatoires :</p>
-            <ul className="space-y-1">
-              {errors.map((e, i) => (
-                <li key={i} className="text-sm text-red-600 flex items-start gap-2">
-                  <span className="text-red-400 mt-0.5">•</span> {e}
-                </li>
-              ))}
-            </ul>
+          <div className="mb-4 flex items-center gap-3 px-4 py-3 bg-red-50 border border-red-200 rounded-xl">
+            <span className="w-6 h-6 rounded-full bg-cpme-red text-white text-xs font-black flex items-center justify-center flex-shrink-0">{errors.length}</span>
+            <p className="text-sm font-semibold text-red-700">
+              {errors.length === 1 ? 'Un champ obligatoire est vide' : `${errors.length} champs obligatoires sont vides`} — ils sont indiqués en rouge ci-dessous.
+            </p>
           </div>
         )}
 
         <form onSubmit={e => e.preventDefault()}>
-          {STEPS[step - 1]}
+          <div key={step} className="step-enter">
+            {STEPS[step - 1]}
+          </div>
         </form>
       </main>
 
