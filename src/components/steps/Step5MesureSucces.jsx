@@ -30,21 +30,21 @@ export default function Step5MesureSucces({ data, onChange }) {
           Indicateurs spécifiques à cette action <span className="font-normal normal-case">(2 max, avec seuils — optionnel)</span>
         </h3>
         <div className="space-y-3">
-          <div className="flex gap-3 items-end">
-            <FormGroup label="Indicateur 1" className="flex-1" style={{ minWidth: 0 }}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
+            <FormGroup label="Indicateur 1" className="flex-1">
               <Input name="indSpe1Nom" value={data.indSpe1Nom} onChange={onChange} placeholder="Nom de l'indicateur" />
             </FormGroup>
-            <div className="w-28 flex-shrink-0">
+            <div className="sm:w-28 sm:flex-shrink-0">
               <FormGroup label="Seuil visé">
                 <Input name="indSpe1Seuil" value={data.indSpe1Seuil} onChange={onChange} placeholder="Ex : 85%" />
               </FormGroup>
             </div>
           </div>
-          <div className="flex gap-3 items-end">
-            <FormGroup label="Indicateur 2" className="flex-1" style={{ minWidth: 0 }}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
+            <FormGroup label="Indicateur 2" className="flex-1">
               <Input name="indSpe2Nom" value={data.indSpe2Nom} onChange={onChange} placeholder="Nom de l'indicateur" />
             </FormGroup>
-            <div className="w-28 flex-shrink-0">
+            <div className="sm:w-28 sm:flex-shrink-0">
               <FormGroup label="Seuil visé">
                 <Input name="indSpe2Seuil" value={data.indSpe2Seuil} onChange={onChange} placeholder="Ex : > 3" />
               </FormGroup>
