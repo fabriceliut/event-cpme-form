@@ -20,13 +20,21 @@ export default function Step3CibleCadre({ data, onChange, showErrors = false }) 
           <FormGroup label="Effectif cible (min)">
             <Input name="effectif" type="number" min="0" value={data.effectif} onChange={onChange} placeholder="Ex : 30" />
           </FormGroup>
-          <FormGroup label="Ratio Adhérents / Non-adhérents">
+          <FormGroup label="Ratio Adhérents %">
             <div className="flex items-center gap-2">
-              <Input name="ratioAdherents" type="number" min="0" max="100" value={data.ratioAdherents} onChange={onChange} placeholder="80" className="text-center" />
-              <span className="text-slate-400 font-bold text-sm flex-shrink-0">% /</span>
-              <Input name="ratioNonAdherents" type="number" min="0" max="100" value={data.ratioNonAdherents} onChange={onChange} placeholder="20" className="text-center" />
+              <Input
+                name="ratioAdherents"
+                type="number" min="0" max="100"
+                value={data.ratioAdherents}
+                onChange={onChange}
+                placeholder="80"
+                className="text-center"
+              />
               <span className="text-slate-400 font-bold text-sm flex-shrink-0">%</span>
             </div>
+            {data.ratioAdherents !== '' && (
+              <p className="text-xs text-slate-400 mt-1">Non-adhérents : {Math.max(0, 100 - Number(data.ratioAdherents))}%</p>
+            )}
           </FormGroup>
         </div>
       </div>

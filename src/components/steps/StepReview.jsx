@@ -110,7 +110,7 @@ export default function StepReview({ data }) {
             rows: [
               ['Profil', data.profil],
               ['Effectif cible', data.effectif],
-              ['Ratio Adh./Non-adh.', `${data.ratioAdherents || 0}% / ${data.ratioNonAdherents || 0}%`],
+              ['Ratio Adh./Non-adh.', `${data.ratioAdherents || 0}% / ${Math.max(0, 100 - Number(data.ratioAdherents || 0))}%`],
               ['Fonction principale', data.fonctionPrincipale],
               ['Fonction secondaire', data.fonctionSecondaire],
               ['Piliers CPME', piliers.join(', ')],

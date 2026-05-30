@@ -71,7 +71,7 @@ export default function PdfTemplate({ data }) {
           <Table rows={[
             ['Profil dirigeant', fmt(data.profil)],
             ['Effectif cible', fmt(data.effectif)],
-            ['Ratio (Adh. / Non-adh.)', `${fmt(data.ratioAdherents, '0')}% / ${fmt(data.ratioNonAdherents, '0')}%`],
+            ['Ratio (Adh. / Non-adh.)', `${fmt(data.ratioAdherents, '0')}% / ${Math.max(0, 100 - Number(data.ratioAdherents || 0))}%`],
           ]} />
           <div style={{ borderLeft: '1px solid #e2e8f0', paddingLeft: '12px' }}>
             <Row label="Fonction principale">
