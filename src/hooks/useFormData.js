@@ -27,14 +27,12 @@ const DEMO_DATA = {
   pilierGrandir: true,
   pilierAider: true,
   // Step 4
-  prepaCre: '2',
-  prepaGaelle: '0.5',
-  prepaFrank: '0.5',
-  prepaPresta: '0',
-  jourCre: '0.5',
-  jourGaelle: '0.5',
-  jourFrank: '0.5',
-  jourPresta: '0',
+  prepaOps: '16',
+  prepaComm: '4',
+  prepaLogistique: '4',
+  jourOps: '4',
+  jourComm: '4',
+  jourLogistique: '2',
   coutTotal: '1800',
   coutDetail: 'Salle siège mutualisée, traiteur 35 couverts, supports impression',
   besoinsMateriels: 'Salle siège CPME, équipement projection, signalétique',
@@ -66,8 +64,6 @@ const DEMO_DATA = {
   valPorteurDate: '',
   valCreNom: 'CRE Industrie',
   valCreDate: '',
-  valFrankDate: '',
-  valGaelleDate: '',
 }
 
 const INITIAL_DATA = {
@@ -98,14 +94,12 @@ const INITIAL_DATA = {
   pilierAider: false,
 
   // Step 4 — Charge & Ressources
-  prepaCre: '',
-  prepaGaelle: '',
-  prepaFrank: '',
-  prepaPresta: '',
-  jourCre: '',
-  jourGaelle: '',
-  jourFrank: '',
-  jourPresta: '',
+  prepaOps: '',
+  prepaComm: '',
+  prepaLogistique: '',
+  jourOps: '',
+  jourComm: '',
+  jourLogistique: '',
   coutTotal: '',
   coutDetail: '',
   besoinsMateriels: '',
@@ -140,8 +134,6 @@ const INITIAL_DATA = {
   valPorteurDate: '',
   valCreNom: '',
   valCreDate: '',
-  valFrankDate: '',
-  valGaelleDate: '',
 }
 
 function loadFromStorage() {
@@ -156,6 +148,7 @@ function loadFromStorage() {
 
 export function useFormData() {
   const [data, setData] = useState(() => loadFromStorage())
+  const [savedAt, setSavedAt] = useState(null)
 
   const handleChange = useCallback((e) => {
     const { name, value, type, checked } = e.target
@@ -164,6 +157,7 @@ export function useFormData() {
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)) } catch {}
       return next
     })
+    setSavedAt(Date.now())
   }, [])
 
   const resetData = useCallback(() => {
@@ -177,5 +171,5 @@ export function useFormData() {
     setData(next)
   }, [])
 
-  return { data, handleChange, resetData, fillDemo }
+  return { data, handleChange, resetData, fillDemo, savedAt }
 }

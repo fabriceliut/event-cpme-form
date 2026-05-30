@@ -2,10 +2,9 @@ import { Users } from 'lucide-react'
 import { FormGroup, Input, Textarea, RadioCard, SectionCard } from '../ui/index.jsx'
 
 const TEAM = [
-  { key: 'Cre', label: 'CRE' },
-  { key: 'Gaelle', label: 'Gaëlle' },
-  { key: 'Frank', label: 'Frank' },
-  { key: 'Presta', label: 'Prestataire' },
+  { key: 'Ops', label: 'Équipe opération' },
+  { key: 'Comm', label: 'Équipe communication' },
+  { key: 'Logistique', label: 'Logistique' },
 ]
 
 export default function Step4ChargeRessources({ data, onChange }) {
@@ -31,7 +30,7 @@ export default function Step4ChargeRessources({ data, onChange }) {
             <tbody>
               <tr>
                 <td className="pr-4 py-2">
-                  <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-1 rounded-md">Préparation (j)</span>
+                  <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-1 rounded-md">Préparation (h)</span>
                 </td>
                 {TEAM.map(m => (
                   <td key={m.key} className="px-2 py-2">
@@ -50,7 +49,7 @@ export default function Step4ChargeRessources({ data, onChange }) {
               </tr>
               <tr>
                 <td className="pr-4 py-2">
-                  <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-1 rounded-md">Jour J (j)</span>
+                  <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-1 rounded-md">Jour J (h)</span>
                 </td>
                 {TEAM.map(m => (
                   <td key={m.key} className="px-2 py-2">

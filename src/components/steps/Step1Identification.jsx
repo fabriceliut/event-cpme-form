@@ -1,7 +1,7 @@
 import { Star, Bookmark, PlusCircle } from 'lucide-react'
 import { FormGroup, Input, RadioCard, SectionCard } from '../ui/index.jsx'
 
-export default function Step1Identification({ data, onChange }) {
+export default function Step1Identification({ data, onChange, showErrors = false }) {
   return (
     <SectionCard number="1" title="Identification">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -13,6 +13,7 @@ export default function Step1Identification({ data, onChange }) {
               onChange={onChange}
               placeholder="Ex : Visite d'entreprise — Transition Écologique"
               className="text-base font-bold"
+              error={showErrors && !data.intitule?.trim()}
             />
           </FormGroup>
         </div>
@@ -20,10 +21,10 @@ export default function Step1Identification({ data, onChange }) {
           <Input name="pole" value={data.pole} onChange={onChange} placeholder="Ex : Pôle Industrie" />
         </FormGroup>
         <FormGroup label="Porteur·euse engagé·e" required>
-          <Input name="porteur" value={data.porteur} onChange={onChange} placeholder="Nom du porteur" />
+          <Input name="porteur" value={data.porteur} onChange={onChange} placeholder="Nom du porteur" error={showErrors && !data.porteur?.trim()} />
         </FormGroup>
         <FormGroup label="CRE responsable" required>
-          <Input name="cre" value={data.cre} onChange={onChange} placeholder="Nom du/de la CRE" />
+          <Input name="cre" value={data.cre} onChange={onChange} placeholder="Nom du/de la CRE" error={showErrors && !data.cre?.trim()} />
         </FormGroup>
         <FormGroup label="Date / période envisagée">
           <Input name="date" value={data.date} onChange={onChange} placeholder="Ex : Mi-octobre 2026" />
@@ -63,6 +64,9 @@ export default function Step1Identification({ data, onChange }) {
               icon={PlusCircle}
             />
           </div>
+          {showErrors && !data.priorite && (
+            <p className="text-xs text-cpme-red mt-2 font-medium">Veuillez sélectionner un niveau de priorité.</p>
+          )}
         </FormGroup>
       </div>
     </SectionCard>

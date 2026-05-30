@@ -96,13 +96,13 @@ export default function PdfTemplate({ data }) {
         {/* Tableau jours */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '12px' }}>
           {[
-            { title: 'Temps Préparation (jours)', keys: ['prepaCre', 'prepaGaelle', 'prepaFrank', 'prepaPresta'] },
-            { title: 'Temps Jour J (jours)', keys: ['jourCre', 'jourGaelle', 'jourFrank', 'jourPresta'] },
+            { title: 'Temps Préparation (heures)', keys: ['prepaOps', 'prepaComm', 'prepaLogistique'] },
+            { title: 'Temps Jour J (heures)', keys: ['jourOps', 'jourComm', 'jourLogistique'] },
           ].map(block => (
             <div key={block.title} style={{ border: '1px solid #e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
               <div style={{ background: '#f1f5f9', padding: '6px 10px', fontWeight: 700, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1px', color: '#475569', borderBottom: '1px solid #e2e8f0', textAlign: 'center' }}>{block.title}</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', textAlign: 'center', padding: '8px 0' }}>
-                {['CRE', 'Gaëlle', 'Frank', 'Presta'].map((lbl, i) => (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', textAlign: 'center', padding: '8px 0' }}>
+                {['Opération', 'Communication', 'Logistique'].map((lbl, i) => (
                   <div key={lbl}>
                     <div style={{ fontSize: '9px', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase' }}>{lbl}</div>
                     <div style={{ fontWeight: 700 }}>{fmt(data[block.keys[i]], '0')}</div>
@@ -175,12 +175,10 @@ export default function PdfTemplate({ data }) {
       {/* Section 7 */}
       <div style={{ pageBreakInside: 'avoid' }}>
         <SectionHeader label="7 · Validation (Signatures)" dark />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', border: '2px solid #1e293b', borderRadius: '8px', overflow: 'hidden' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', border: '2px solid #1e293b', borderRadius: '8px', overflow: 'hidden' }}>
           {[
-            { role: 'Porteur·euse engagé·e', nom: data.valPorteurNom, date: data.valPorteurDate, bg: 'white' },
+            { role: 'Porteur·euse / Président·e de club', nom: data.valPorteurNom, date: data.valPorteurDate, bg: 'white' },
             { role: 'CRE Responsable', nom: data.valCreNom, date: data.valCreDate, bg: 'white' },
-            { role: 'Validation Frank Lebel', nom: 'Frank Lebel', date: data.valFrankDate, bg: '#f0fdf4' },
-            { role: 'Validation Gaëlle', nom: 'Gaëlle', date: data.valGaelleDate, bg: '#f0fdf4' },
           ].map((v, i) => (
             <div key={i} style={{ padding: '12px', textAlign: 'center', background: v.bg, borderLeft: i > 0 ? '2px solid #1e293b' : 'none' }}>
               <div style={{ fontSize: '9px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>{v.role}</div>

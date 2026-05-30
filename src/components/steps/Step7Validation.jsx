@@ -8,13 +8,13 @@ export default function Step7Validation({ data, onChange }) {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Porteur */}
+        {/* Porteur / Président */}
         <div className="p-4 bg-white border-2 border-slate-100 rounded-xl space-y-3">
-          <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Porteur·euse engagé·e</h4>
-          <FormGroup label="Nom">
+          <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Porteur·euse / Président·e de club</h4>
+          <FormGroup label="Nom et prénom">
             <Input name="valPorteurNom" value={data.valPorteurNom} onChange={onChange} placeholder="Nom et prénom" />
           </FormGroup>
-          <FormGroup label="Date">
+          <FormGroup label="Date de signature">
             <Input type="date" name="valPorteurDate" value={data.valPorteurDate} onChange={onChange} />
           </FormGroup>
         </div>
@@ -22,31 +22,19 @@ export default function Step7Validation({ data, onChange }) {
         {/* CRE */}
         <div className="p-4 bg-white border-2 border-slate-100 rounded-xl space-y-3">
           <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">CRE Responsable</h4>
-          <FormGroup label="Nom">
+          <FormGroup label="Nom et prénom">
             <Input name="valCreNom" value={data.valCreNom} onChange={onChange} placeholder="Nom et prénom" />
           </FormGroup>
-          <FormGroup label="Date">
+          <FormGroup label="Date de signature">
             <Input type="date" name="valCreDate" value={data.valCreDate} onChange={onChange} />
           </FormGroup>
         </div>
+      </div>
 
-        {/* Frank Lebel — champ date libre, nom fixe */}
-        <div className="p-4 bg-green-50 border-2 border-green-100 rounded-xl space-y-3">
-          <h4 className="text-xs font-bold text-green-700 uppercase tracking-widest">Validation Frank Lebel</h4>
-          <p className="text-xs text-green-600 font-medium">Frank Lebel — CPME Rhône</p>
-          <FormGroup label="Date de validation">
-            <Input type="date" name="valFrankDate" value={data.valFrankDate} onChange={onChange} className="!bg-white" />
-          </FormGroup>
-        </div>
-
-        {/* Gaëlle — champ date libre, nom fixe */}
-        <div className="p-4 bg-green-50 border-2 border-green-100 rounded-xl space-y-3">
-          <h4 className="text-xs font-bold text-green-700 uppercase tracking-widest">Validation Gaëlle</h4>
-          <p className="text-xs text-green-600 font-medium">Gaëlle — CPME Rhône</p>
-          <FormGroup label="Date de validation">
-            <Input type="date" name="valGaelleDate" value={data.valGaelleDate} onChange={onChange} className="!bg-white" />
-          </FormGroup>
-        </div>
+      <div className="mt-4 p-4 bg-slate-50 border border-dashed border-slate-300 rounded-xl">
+        <p className="text-xs text-slate-500 font-medium">
+          📩 La validation finale par Frank Lebel et Gaëlle sera complétée par l'équipe CPME Rhône après réception de la fiche.
+        </p>
       </div>
     </SectionCard>
   )

@@ -2,7 +2,7 @@ import { FormGroup, Input, Textarea, PillRadio, SectionCard } from '../ui/index.
 
 const FORMATS = ['Apéro', 'Petit-déj', 'Visite', 'Atelier', 'AG', 'Table-ronde', 'Webinaire', 'Autre']
 
-export default function Step2FormatIntention({ data, onChange }) {
+export default function Step2FormatIntention({ data, onChange, showErrors = false }) {
   return (
     <SectionCard number="2" title="Format &amp; Intention">
       <FormGroup label="Q1. Format envisagé" required>
@@ -28,6 +28,9 @@ export default function Step2FormatIntention({ data, onChange }) {
             />
           </div>
         )}
+        {showErrors && !data.format && (
+          <p className="text-xs text-cpme-red mt-1 font-medium">Veuillez sélectionner un format.</p>
+        )}
       </FormGroup>
 
       <FormGroup
@@ -40,6 +43,7 @@ export default function Step2FormatIntention({ data, onChange }) {
           value={data.besoin}
           onChange={onChange}
           placeholder="Ex : Forte demande des adhérents industriels suite au bilan de l'AG 2025…"
+          error={showErrors && !data.besoin?.trim()}
         />
       </FormGroup>
 

@@ -1,19 +1,23 @@
-export const Input = ({ className = '', ...props }) => (
+export const Input = ({ className = '', error = false, ...props }) => (
   <input
-    className={`w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl
-      focus:bg-white focus:ring-2 focus:ring-cpme-lightblue/20 focus:border-cpme-lightblue
-      outline-none transition-all text-sm font-medium text-slate-700 placeholder-slate-400
-      disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+    className={`w-full px-4 py-3 rounded-xl border outline-none transition-all text-sm font-medium placeholder-slate-400
+      disabled:opacity-50 disabled:cursor-not-allowed
+      ${error
+        ? 'bg-red-50 border-cpme-red focus:ring-2 focus:ring-cpme-red/20 focus:border-cpme-red text-slate-700'
+        : 'bg-slate-50 border-slate-200 focus:bg-white focus:ring-2 focus:ring-cpme-lightblue/20 focus:border-cpme-lightblue text-slate-700'
+      } ${className}`}
     {...props}
   />
 )
 
-export const Textarea = ({ className = '', ...props }) => (
+export const Textarea = ({ className = '', error = false, ...props }) => (
   <textarea
-    className={`w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl
-      focus:bg-white focus:ring-2 focus:ring-cpme-lightblue/20 focus:border-cpme-lightblue
-      outline-none transition-all text-sm font-medium text-slate-700 placeholder-slate-400
-      min-h-[110px] resize-y ${className}`}
+    className={`w-full px-4 py-3 rounded-xl border outline-none transition-all text-sm font-medium placeholder-slate-400
+      min-h-[110px] resize-y
+      ${error
+        ? 'bg-red-50 border-cpme-red focus:ring-2 focus:ring-cpme-red/20 focus:border-cpme-red text-slate-700'
+        : 'bg-slate-50 border-slate-200 focus:bg-white focus:ring-2 focus:ring-cpme-lightblue/20 focus:border-cpme-lightblue text-slate-700'
+      } ${className}`}
     {...props}
   />
 )

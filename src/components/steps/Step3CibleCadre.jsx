@@ -3,7 +3,7 @@ import { FormGroup, Input, RadioCard, Checkbox, SectionCard } from '../ui/index.
 
 const FONCTIONS = ['Réseauter', 'Mettre en avant', 'Travailler', 'Défendre & Représenter']
 
-export default function Step3CibleCadre({ data, onChange }) {
+export default function Step3CibleCadre({ data, onChange, showErrors = false }) {
   return (
     <SectionCard number="3" title="Cible &amp; Cadre CPME">
       {/* Q4 */}
@@ -48,8 +48,9 @@ export default function Step3CibleCadre({ data, onChange }) {
               label={f}
             />
           ))}
-        </div>
-        <div className="mt-3">
+        </div>        {showErrors && !data.fonctionPrincipale && (
+          <p className="text-xs text-cpme-red mt-1 font-medium">Veuillez sélectionner une fonction principale.</p>
+        )}        <div className="mt-3">
           <FormGroup label="Fonction secondaire (optionnel)">
             <div className="flex flex-wrap gap-2">
               {FONCTIONS.filter(f => f !== data.fonctionPrincipale).map(f => (
@@ -78,11 +79,14 @@ export default function Step3CibleCadre({ data, onChange }) {
 
       {/* Q6 */}
       <FormGroup label="Q6. Pilier CPME servi" required hint="Au moins un">
-        <div className="flex flex-col gap-2 mt-1">
+        <div className={`flex flex-col gap-2 mt-1 rounded-xl transition-all ${showErrors && !data.pilierDefendre && !data.pilierGrandir && !data.pilierAider ? 'p-3 border border-cpme-red bg-red-50' : ''}`}>
           <Checkbox name="pilierDefendre" checked={data.pilierDefendre} onChange={onChange} label="Défendre la voix des patrons" />
           <Checkbox name="pilierGrandir" checked={data.pilierGrandir} onChange={onChange} label="Faire grandir les dirigeants" />
           <Checkbox name="pilierAider" checked={data.pilierAider} onChange={onChange} label="Aider les entreprises" />
         </div>
+        {showErrors && !data.pilierDefendre && !data.pilierGrandir && !data.pilierAider && (
+          <p className="text-xs text-cpme-red mt-1 font-medium">Cochez au moins un pilier CPME.</p>
+        )}
       </FormGroup>
     </SectionCard>
   )
