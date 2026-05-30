@@ -138,7 +138,7 @@ export default function PdfTemplate({ data }) {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
             <tbody>
               {[
-                ['Présence (réelle / cible)', `${fmt(data.indPresenceReelle, '?')} / ${fmt(data.indPresenceCible, '?')}`],
+                ['Présence (min. / idéale)', `${fmt(data.indPresenceReelle, '?')} / ${fmt(data.indPresenceCible, '?')}`],
                 ['Conversion adhésion 30j', fmt(data.indConversion)],
                 ['NPS post-événement', `${fmt(data.indNps)} / 10`],
                 data.indSpe1Nom && [data.indSpe1Nom, fmt(data.indSpe1Seuil)],
@@ -175,17 +175,23 @@ export default function PdfTemplate({ data }) {
       {/* Section 7 */}
       <div style={{ pageBreakInside: 'avoid' }}>
         <SectionHeader label="7 · Validation (Signatures)" dark />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', border: '2px solid #1e293b', borderRadius: '8px', overflow: 'hidden' }}>
-          {[
-            { role: 'Porteur·euse / Président·e de club', nom: data.valPorteurNom, date: data.valPorteurDate, bg: 'white' },
-            { role: 'CRE Responsable', nom: data.valCreNom, date: data.valCreDate, bg: 'white' },
-          ].map((v, i) => (
-            <div key={i} style={{ padding: '12px', textAlign: 'center', background: v.bg, borderLeft: i > 0 ? '2px solid #1e293b' : 'none' }}>
-              <div style={{ fontSize: '9px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>{v.role}</div>
-              <div style={{ fontWeight: 700, color: '#0F3057', marginBottom: '16px', minHeight: '20px' }}>{fmt(v.nom)}</div>
-              <div style={{ fontSize: '11px', color: '#94a3b8' }}>{fmt(v.date)}</div>
-            </div>
-          ))}
+        <div style={{ border: '2px solid #1e293b', borderRadius: '8px', overflow: 'hidden' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+            {[
+              { role: 'Porteur·euse / Président·e de club', nom: data.valPorteurNom },
+              { role: 'CRE Responsable', nom: data.valCreNom },
+            ].map((v, i) => (
+              <div key={i} style={{ padding: '16px 14px', textAlign: 'center', background: 'white', borderLeft: i > 0 ? '2px solid #1e293b' : 'none' }}>
+                <div style={{ fontSize: '9px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>{v.role}</div>
+                <div style={{ fontWeight: 700, color: '#0F3057', fontSize: '13px', marginBottom: '24px', minHeight: '20px' }}>{fmt(v.nom)}</div>
+                <div style={{ borderTop: '1px solid #cbd5e1', paddingTop: '4px', fontSize: '9px', color: '#94a3b8', letterSpacing: '1px', textTransform: 'uppercase' }}>Signature</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ borderTop: '2px solid #1e293b', padding: '8px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f8fafc' }}>
+            <span style={{ fontSize: '10px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px' }}>Date de signature</span>
+            <span style={{ fontWeight: 700, color: '#0F3057' }}>{fmt(data.valSignatureDate)}</span>
+          </div>
         </div>
       </div>
 
@@ -201,16 +207,16 @@ export default function PdfTemplate({ data }) {
 function SectionHeader({ label, dark }) {
   return (
     <div style={{
-      background: dark ? '#1e293b' : '#1A4D8C',
+      background: dark ? '#1e293b' : '#0F3057',
       color: 'white',
-      padding: '5px 10px',
-      display: 'inline-block',
+      padding: '6px 12px',
+      display: 'block',
       fontWeight: 700,
       fontSize: '11px',
       textTransform: 'uppercase',
-      letterSpacing: '1px',
-      borderRadius: '4px',
-      marginBottom: '10px',
+      letterSpacing: '1.5px',
+      borderRadius: '5px',
+      marginBottom: '12px',
     }}>
       {label}
     </div>
@@ -219,12 +225,12 @@ function SectionHeader({ label, dark }) {
 
 function Table({ rows }) {
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
+    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', border: '1px solid #e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
       <tbody>
         {rows.map(([lbl, val], i) => (
-          <tr key={i} style={{ borderBottom: '1px solid #e2e8f0' }}>
-            <td style={{ padding: '6px 0', width: '35%', color: '#64748b', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{lbl}</td>
-            <td style={{ padding: '6px 0', fontWeight: 500 }}>{val}</td>
+          <tr key={i} style={{ background: i % 2 === 0 ? '#f8fafc' : 'white', borderBottom: '1px solid #e2e8f0' }}>
+            <td style={{ padding: '7px 10px', width: '38%', color: '#64748b', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.5px', verticalAlign: 'top' }}>{lbl}</td>
+            <td style={{ padding: '7px 10px', fontWeight: 500, color: '#1e293b', lineHeight: 1.5 }}>{val}</td>
           </tr>
         ))}
       </tbody>

@@ -61,9 +61,8 @@ const DEMO_DATA = {
   mercrediJour: '',
   // Step 7
   valPorteurNom: 'Président·e Club Industrie',
-  valPorteurDate: '',
   valCreNom: 'CRE Industrie',
-  valCreDate: '',
+  valSignatureDate: '',
 }
 
 const INITIAL_DATA = {
@@ -131,9 +130,8 @@ const INITIAL_DATA = {
 
   // Step 7 — Validation
   valPorteurNom: '',
-  valPorteurDate: '',
   valCreNom: '',
-  valCreDate: '',
+  valSignatureDate: '',
 }
 
 function loadFromStorage() {

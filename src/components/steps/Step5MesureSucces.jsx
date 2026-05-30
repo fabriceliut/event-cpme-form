@@ -9,11 +9,11 @@ export default function Step5MesureSucces({ data, onChange }) {
       <div>
         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Indicateurs standards CPME</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormGroup label="Présence réelle">
-            <Input name="indPresenceReelle" value={data.indPresenceReelle} onChange={onChange} placeholder="Nombre réel (si connu)" />
+          <FormGroup label="Présence minimum visée">
+            <Input name="indPresenceReelle" value={data.indPresenceReelle} onChange={onChange} placeholder="Ex : 20 personnes" />
           </FormGroup>
-          <FormGroup label="Présence cible" required>
-            <Input name="indPresenceCible" type="number" min="0" value={data.indPresenceCible} onChange={onChange} placeholder="Objectif" />
+          <FormGroup label="Présence idéale" required>
+            <Input name="indPresenceCible" type="number" min="0" value={data.indPresenceCible} onChange={onChange} placeholder="Ex : 40 personnes" />
           </FormGroup>
           <FormGroup label="Conversion adhésion à 30 j">
             <Input name="indConversion" value={data.indConversion} onChange={onChange} placeholder="Ex : 2 nouvelles adhésions" />

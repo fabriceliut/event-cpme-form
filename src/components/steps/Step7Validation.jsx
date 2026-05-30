@@ -14,9 +14,6 @@ export default function Step7Validation({ data, onChange }) {
           <FormGroup label="Nom et prénom">
             <Input name="valPorteurNom" value={data.valPorteurNom} onChange={onChange} placeholder="Nom et prénom" />
           </FormGroup>
-          <FormGroup label="Date de signature">
-            <Input type="date" name="valPorteurDate" value={data.valPorteurDate} onChange={onChange} />
-          </FormGroup>
         </div>
 
         {/* CRE */}
@@ -25,10 +22,13 @@ export default function Step7Validation({ data, onChange }) {
           <FormGroup label="Nom et prénom">
             <Input name="valCreNom" value={data.valCreNom} onChange={onChange} placeholder="Nom et prénom" />
           </FormGroup>
-          <FormGroup label="Date de signature">
-            <Input type="date" name="valCreDate" value={data.valCreDate} onChange={onChange} />
-          </FormGroup>
         </div>
+      </div>
+
+      <div className="mt-4">
+        <FormGroup label="Date de signature">
+          <Input type="date" name="valSignatureDate" value={data.valSignatureDate} onChange={onChange} />
+        </FormGroup>
       </div>
 
       <div className="mt-4 p-4 bg-slate-50 border border-dashed border-slate-300 rounded-xl">

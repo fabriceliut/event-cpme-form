@@ -106,10 +106,19 @@ export default function Step4ChargeRessources({ data, onChange }) {
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormGroup label="Financement / Sponsoring" hint="Sponsoring, partenaires, subventions, partage des coûts">
             <div className="flex gap-2 mb-2">
-              <Input name="financementQui" value={data.financementQui} onChange={onChange} placeholder="Sponsor / organisme" className="flex-1" />
-              <Input name="financementMontant" value={data.financementMontant} onChange={onChange} placeholder="Montant" className="w-28" />
+              <div className="flex-1 space-y-1">
+                <p className="text-xs text-slate-400 font-medium">Sponsor / organisme</p>
+                <Input name="financementQui" value={data.financementQui} onChange={onChange} placeholder="Ex : CCI Rhône" />
+              </div>
+              <div className="w-28 flex-shrink-0 space-y-1">
+                <p className="text-xs text-slate-400 font-medium">Montant €</p>
+                <Input name="financementMontant" value={data.financementMontant} onChange={onChange} placeholder="500 €" />
+              </div>
             </div>
-            <Input name="financementContrepartie" value={data.financementContrepartie} onChange={onChange} placeholder="Contrepartie (ex : Logo, prise de parole…)" />
+            <div className="space-y-1">
+              <p className="text-xs text-slate-400 font-medium">Contrepartie</p>
+              <Input name="financementContrepartie" value={data.financementContrepartie} onChange={onChange} placeholder="Ex : Logo sur supports, prise de parole…" />
+            </div>
           </FormGroup>
 
           <FormGroup label="Ponts vers d'autres écosystèmes" hint="Clubs sectoriels, fédérations, acteurs publics, innovation">

@@ -24,9 +24,9 @@ const LABEL = {
 function ReviewRow({ label, value }) {
   if (!value && value !== 0) return null
   return (
-    <div className="flex justify-between items-start py-2 border-b border-slate-100 last:border-0 gap-4">
-      <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide flex-shrink-0">{label}</span>
-      <span className="text-sm font-medium text-slate-800 text-right">{String(value)}</span>
+    <div className="flex justify-between items-start py-2 border-b border-slate-100 last:border-0 gap-3">
+      <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide flex-shrink-0 max-w-[45%]">{label}</span>
+      <span className="text-sm font-medium text-slate-800 text-right break-words min-w-0">{String(value)}</span>
     </div>
   )
 }
@@ -127,7 +127,7 @@ export default function StepReview({ data }) {
           {
             title: '5 · Mesure de Succès',
             rows: [
-              ['Présence cible', data.indPresenceCible],
+              ['Présence idéale', data.indPresenceCible],
               ['Conversion 30j', data.indConversion],
               ['NPS', data.indNps ? `${data.indNps}/10` : null],
               [data.indSpe1Nom || null, data.indSpe1Seuil],
@@ -142,6 +142,7 @@ export default function StepReview({ data }) {
               ['Créneau Mercredi', data.mercredi],
               ['Porteur (signature)', data.valPorteurNom],
               ['CRE (signature)', data.valCreNom],
+              ['Date de signature', data.valSignatureDate],
             ]
           },
         ].map(card => (
