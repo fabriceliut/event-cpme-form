@@ -3,66 +3,72 @@ import { useState, useCallback } from 'react'
 const STORAGE_KEY = 'cpme_form_data'
 
 const DEMO_DATA = {
-  // Step 1
+  // Step 1 — Identification
   intitule: 'Déjeuner Club Industrie · Recrutement et attractivité industrielle',
   pole: 'Club Industrie',
-  porteur: 'Président·e du Club Industrie',
-  cre: 'CRE Industrie',
-  date: 'À définir — automne 2026',
-  lieu: 'Siège CPME Rhône',
+  porteur: 'Marie Dupont',
+  cre: 'Thomas Bernard',
+  date: '2026-10-15',
+  lieu: 'Siège CPME Rhône — Salle Confluence, Lyon 2',
   priorite: 'Indispensable',
-  // Step 2
-  format: 'Autre',
-  formatAutre: 'Déjeuner thématique',
-  besoin: 'Tension recrutement remontée par 8 adhérents industriels sur 12 lors du dernier P&V (mars 2026). Sujet n°1 du bilan Club Industrie 2025 et récurrent dans les verbatims AG.',
-  repartAvec: '2 dispositifs d\'attractivité concrets transposables · les contacts directs des intervenants · une liste qualifiée d\'acteurs alternance / lycées pros activables sous 30 j · une mise en relation 1:1 sollicitée le jour J.',
-  // Step 3
-  profil: 'Dirigeants industriels PME et ETI (20-250 salariés)',
+
+  // Step 2 — Format & Intention
+  format: 'Déjeuner',
+  formatAutre: '',
+  besoin: 'Tension recrutement remontée par 8 adhérents industriels sur 12 lors du dernier P&V (mars 2026). Sujet n°1 du bilan Club Industrie 2025 et récurrent dans les verbatims AG. Les dirigeants manquent de méthodes concrètes et de contacts directs avec les acteurs de la formation.',
+  repartAvec: '• 2 dispositifs d\'attractivité concrets et transposables immédiatement\n• Les contacts directs des 3 intervenants experts\n• Une liste qualifiée d\'acteurs alternance / lycées pros activables sous 30 j\n• Une mise en relation 1:1 entre dirigeants et CFA souhaitée le jour J',
+
+  // Step 3 — Cible & Cadre
+  profil: 'Dirigeants industriels PME et ETI (20–250 salariés), secteurs métallurgie, plasturgie, agroalimentaire',
   effectif: '35',
-  ratioAdherents: '90',
-  ratioNonAdherents: '10',
+  ratioAdherents: '85',
+  ratioNonAdherents: '15',
   fonctionPrincipale: 'Travailler',
   fonctionSecondaire: 'Réseauter',
   pilierDefendre: false,
   pilierGrandir: true,
   pilierAider: true,
-  // Step 4
+
+  // Step 4 — Charge, Ressources & Écosystème
   prepaOps: '16',
-  prepaComm: '4',
+  prepaComm: '6',
   prepaLogistique: '4',
   jourOps: '4',
-  jourComm: '4',
-  jourLogistique: '2',
+  jourComm: '2',
+  jourLogistique: '3',
   coutTotal: '1800',
-  coutDetail: 'Salle siège mutualisée, traiteur 35 couverts, supports impression',
-  besoinsMateriels: 'Salle siège CPME, équipement projection, signalétique',
+  coutDetail: 'Traiteur déjeuner 35 couverts : 1 200 €\nSupports impression (programmes, badges) : 150 €\nMission intervenant externe : 450 €',
+  besoinsMateriels: 'Salle siège CPME (Confluence) avec vidéoprojecteur\nSonorisation portable\nBadges nominatifs + kakémono CPME\nListe émargement',
   partenaireType: 'coconstruit',
-  partenaireQui: 'CFA partenaire (piste : CFA de l\'Industrie)',
-  partenaireRoles: 'Club Industrie : lead événement. CFA : co-construction volet alternance.',
-  financementQui: '',
-  financementMontant: '',
-  financementContrepartie: '',
-  ponts: 'Fédération métallurgie locale, ARDI, mission locale dirigeants',
-  // Step 5
-  indPresenceReelle: '',
+  partenaireQui: 'CFA de l\'Industrie Rhône-Alpes',
+  partenaireRoles: 'CPME : lead organisation, animation, invitations adhérents\nCFA : co-construction programme volet alternance, présentation de 2 dispositifs concrets',
+  financementQui: 'CFA de l\'Industrie Rhône-Alpes',
+  financementMontant: '600',
+  financementContrepartie: 'Logo sur invitation et programme · Prise de parole 10 min en début de repas',
+  ponts: 'Fédération de la métallurgie locale\nARDI (Agence Régionale Développement Industriel)\nMission Locale Dirigeants\nLycées professionnels partenaires (Bac Pro Usinage)',
+
+  // Step 5 — Mesure de Succès
+  indPresenceReelle: '20',
   indPresenceCible: '35',
-  indConversion: '≥ 1 adhésion dans les 30 j post-événement',
+  indConversion: '≥ 1 nouvelle adhésion dans les 30 j post-événement',
   indNps: '8',
-  indSpe1Nom: 'Mises en relation actées (alternance / lycées pros)',
-  indSpe1Seuil: '≥ 5 sous 30 j',
-  indSpe2Nom: 'Retours d\'expérience écrits remontés',
-  indSpe2Seuil: '≥ 3 sous 60 j',
-  // Step 6
+  indSpe1Nom: 'Mises en relation actées (dirigeants ↔ CFA / lycées pros)',
+  indSpe1Seuil: '≥ 5 contacts activés sous 30 j',
+  indSpe2Nom: 'Retours d\'expérience écrits remontés à l\'équipe CPME',
+  indSpe2Seuil: '≥ 3 témoignages sous 60 j',
+
+  // Step 6 — Orientations
   echFrank: 'Oui',
-  echFrankModalite: 'Créneau introductif 10 min en ouverture',
+  echFrankModalite: 'Ouverture de séance — 5 min de cadrage stratégique CPME sur l\'enjeu recrutement industriel',
   divHorsDej: 'Non',
   divHorsDejPrec: '',
-  mercredi: 'Non',
-  mercrediJour: '',
-  // Step 7
-  valPorteurNom: 'Président·e Club Industrie',
-  valCreNom: 'CRE Industrie',
-  valSignatureDate: '',
+  mercredi: 'Oui',
+  mercrediJour: 'Mercredi 15 octobre 2026 — 12h00 à 14h30',
+
+  // Step 7 — Validation
+  valPorteurNom: 'Marie Dupont',
+  valCreNom: 'Thomas Bernard',
+  valSignatureDate: '2026-06-20',
 }
 
 const INITIAL_DATA = {
