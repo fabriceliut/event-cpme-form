@@ -33,6 +33,15 @@ export default function Step2FormatIntention({ data, onChange, showErrors = fals
         )}
       </FormGroup>
 
+      <FormGroup label="Q1b. Durée / horaires souhaités">
+        <Input
+          name="duree"
+          value={data.duree}
+          onChange={onChange}
+          placeholder="Ex : 12h00 à 14h30 — déjeuner debout, 2h30"
+        />
+      </FormGroup>
+
       <FormGroup
         label="Q2. Besoin adhérent auquel répond cette action"
         required

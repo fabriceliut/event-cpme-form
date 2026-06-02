@@ -6,8 +6,8 @@ const DEMO_DATA = {
   // Step 1 — Identification
   intitule: 'Déjeuner Club Industrie — Recruter et fidéliser dans l\'industrie rhônalpine',
   pole: 'Club Industrie CPME Rhône',
-  porteur: 'Jean-Pierre Favre',
-  cre: 'Sophie Mercier',
+  president: 'Jean-Pierre Favre',
+  chefProjet: 'Sophie Mercier',
   date: '2026-10-14',
   lieu: 'Siège CPME Rhône — Salle Confluence, 22 rue de la Charité, Lyon 2e',
   priorite: 'Indispensable',
@@ -15,14 +15,14 @@ const DEMO_DATA = {
   // Step 2 — Format & Intention
   format: 'Déjeuner',
   formatAutre: '',
+  duree: '12h00 à 14h30 — déjeuner debout, 2h30 dont 45 min d\'échanges experts + permanence conseiller en fin de séance',
   besoin: 'Lors du bilan annuel du Club Industrie (mars 2026), 11 dirigeants sur 14 ont classé la difficulté de recrutement comme obstacle n°1 à leur croissance. Le sujet revient à chaque Regards & Visions et représente 70 % des verbatims de l\'AG 2025. Les adhérents manquent à la fois de méthodes concrètes et de contacts directs avec les acteurs locaux de la formation industrielle. Dernier événement CPME Rhône sur ce sujet : 2023 — besoin de réactualiser.',
   repartAvec: '• 3 leviers d\'attractivité employeur activables immédiatement en PME industrielle (marque employeur, alternance, partenariats lycées pros)\n• Les coordonnées directes des intervenants (OPCO 2i, CFA Industrie ARA) pour donner suite sans intermédiaire\n• La cartographie des dispositifs d\'aide au recrutement disponibles dans le Rhône en 2026–2027\n• Une mise en relation 1:1 initiée le jour J entre les dirigeants volontaires et les partenaires formation présents',
 
   // Step 3 — Cible & Cadre
   profil: 'Dirigeants et DRH de PME industrielles (15–250 salariés) — métallurgie, plasturgie, mécanique de précision, agroalimentaire du Rhône',
-  effectif: '35',
+  nbParticipants: '35',
   ratioAdherents: '80',
-  ratioNonAdherents: '20',
   fonctionPrincipale: 'Travailler',
   fonctionSecondaire: 'Réseauter',
   pilierDefendre: false,
@@ -48,22 +48,19 @@ const DEMO_DATA = {
   ponts: 'UIMM Rhône-Alpes\nARDI — Agence Régionale Développement Industriel\nMission locale Grand Lyon\nLycées professionnels du Rhône (Bac Pro Usinage, MEI)\nRégion ARA — dispositifs emploi industriel',
 
   // Step 5 — Mesure de Succès
-  indPresenceReelle: '22',
-  indPresenceCible: '35',
+  indPresenceMini: '22',
   indConversion: '≥ 2 nouvelles adhésions ou renouvellements actés dans les 45 j post-événement',
-  indNps: '8',
-  indSpe1Nom: 'Dirigeants ayant initié un contact opérationnel (CFA / OPCO / lycée) dans les 30 j',
-  indSpe1Seuil: '≥ 6',
-  indSpe2Nom: 'Témoignages écrits exploitables reçus pour capitalisation CPME',
-  indSpe2Seuil: '≥ 3 sous 60 j',
+  indNote: '8',
+  indRecommandation: '80',
+  indSpe1: 'Dirigeants ayant initié un contact opérationnel (CFA / OPCO / lycée pro) dans les 30 j — seuil : ≥ 6',
+  indSpe2: 'Témoignages écrits exploitables reçus pour capitalisation CPME — seuil : ≥ 3 sous 60 j',
 
   // Step 6 — Orientations
   echFrank: 'Oui',
-  echFrankModalite: 'Mot d\'ouverture par Frank Morize (5 min) — positionnement CPME Rhône sur le recrutement industriel comme enjeu stratégique 2026–2027 et inscription dans le plan d\'action du Club Industrie',
   divHorsDej: 'Oui',
-  divHorsDejPrec: 'Visite courte (30 min, optionnelle) de l\'atelier d\'un adhérent industriel lyonnais en post-déjeuner — à confirmer avec l\'hébergeur avant le 15 septembre',
-  mercredi: 'Oui',
-  mercrediJour: 'Mercredi 14 octobre 2026 — 12 h 00 à 14 h 30',
+  devPartenariats: 'Oui',
+  devReseaux: 'Oui',
+  appuiPartenaires: 'Non',
 
   // Step 7 — Validation
   valPorteurNom: 'Jean-Pierre Favre',
@@ -75,8 +72,8 @@ const INITIAL_DATA = {
   // Step 1 — Identification
   intitule: '',
   pole: '',
-  porteur: '',
-  cre: '',
+  president: '',
+  chefProjet: '',
   date: '',
   lieu: '',
   priorite: '',
@@ -84,14 +81,14 @@ const INITIAL_DATA = {
   // Step 2 — Format & Intention
   format: '',
   formatAutre: '',
+  duree: '',
   besoin: '',
   repartAvec: '',
 
   // Step 3 — Cible & Cadre
   profil: '',
-  effectif: '',
+  nbParticipants: '',
   ratioAdherents: '',
-  ratioNonAdherents: '',
   fonctionPrincipale: '',
   fonctionSecondaire: '',
   pilierDefendre: false,
@@ -117,22 +114,19 @@ const INITIAL_DATA = {
   ponts: '',
 
   // Step 5 — Mesure de succès
-  indPresenceReelle: '',
-  indPresenceCible: '',
+  indPresenceMini: '',
   indConversion: '',
-  indNps: '',
-  indSpe1Nom: '',
-  indSpe1Seuil: '',
-  indSpe2Nom: '',
-  indSpe2Seuil: '',
+  indNote: '',
+  indRecommandation: '',
+  indSpe1: '',
+  indSpe2: '',
 
   // Step 6 — Orientations
   echFrank: 'Non',
-  echFrankModalite: '',
   divHorsDej: 'Non',
-  divHorsDejPrec: '',
-  mercredi: 'Non',
-  mercrediJour: '',
+  devPartenariats: 'Non',
+  devReseaux: 'Non',
+  appuiPartenaires: 'Non',
 
   // Step 7 — Validation
   valPorteurNom: '',

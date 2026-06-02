@@ -5,20 +5,21 @@ import PdfTemplate from '../PdfTemplate.jsx'
 const LABEL = {
   intitule: 'Intitulé',
   pole: 'Pôle / Club',
-  porteur: 'Porteur·euse',
-  cre: 'CRE',
+  president: 'Présidence engagée',
+  chefProjet: 'Chef de projet',
   date: 'Date',
   lieu: 'Lieu',
   priorite: 'Priorité',
   format: 'Format',
+  duree: 'Durée / horaires',
   besoin: 'Q2 Besoin adhérent',
   repartAvec: 'Q3 Ce avec quoi on repart',
   profil: 'Profil dirigeant',
-  effectif: 'Effectif cible',
+  nbParticipants: 'Nbre de participants',
   fonctionPrincipale: 'Fonction principale',
-  indPresenceCible: 'Présence cible',
-  indNps: 'NPS',
-  indConversion: 'Conversion 30j',
+  indPresenceMini: 'Présence mini',
+  indNote: 'Note évaluation',
+  indConversion: 'Conversion adhésion',
 }
 
 function ReviewRow({ label, value }) {
@@ -64,9 +65,9 @@ export default function StepReview({ data }) {
   }
 
   const piliers = [
-    data.pilierDefendre && 'Défendre la voix des patrons',
-    data.pilierGrandir && 'Faire grandir les dirigeants',
-    data.pilierAider && 'Aider les entreprises',
+    data.pilierDefendre && 'Représenter et défendre la voix patronale',
+    data.pilierGrandir && 'Faire grandir les dirigeants et les entreprises',
+    data.pilierAider && 'Rompre la solitude du dirigeant par le réseau, les collectifs et les mises en relation',
   ].filter(Boolean)
 
   return (
@@ -90,8 +91,8 @@ export default function StepReview({ data }) {
             rows: [
               ['Intitulé', data.intitule],
               ['Pôle / Club', data.pole],
-              ['Porteur·euse', data.porteur],
-              ['CRE', data.cre],
+              ['Présidence engagée', data.president],
+              ['Chef de projet', data.chefProjet],
               ['Date', data.date],
               ['Lieu', data.lieu],
               ['Priorité', data.priorite],
@@ -101,6 +102,7 @@ export default function StepReview({ data }) {
             title: '2 · Format & Intention',
             rows: [
               ['Format', data.format === 'Autre' ? data.formatAutre : data.format],
+              ['Durée / horaires', data.duree],
               ['Besoin adhérent', data.besoin],
               ['Ce avec quoi on repart', data.repartAvec],
             ]
@@ -109,7 +111,7 @@ export default function StepReview({ data }) {
             title: '3 · Cible & Cadre',
             rows: [
               ['Profil', data.profil],
-              ['Effectif cible', data.effectif],
+              ['Nbre de participants', data.nbParticipants],
               ['Ratio Adh./Non-adh.', `${data.ratioAdherents || 0}% / ${Math.max(0, 100 - Number(data.ratioAdherents || 0))}%`],
               ['Fonction principale', data.fonctionPrincipale],
               ['Fonction secondaire', data.fonctionSecondaire],
@@ -127,19 +129,22 @@ export default function StepReview({ data }) {
           {
             title: '5 · Mesure de Succès',
             rows: [
-              ['Présence idéale', data.indPresenceCible],
-              ['Conversion 30j', data.indConversion],
-              ['NPS', data.indNps ? `${data.indNps}/10` : null],
-              [data.indSpe1Nom || null, data.indSpe1Seuil],
-              [data.indSpe2Nom || null, data.indSpe2Seuil],
-            ].filter(([l]) => l)
+              ['Présence mini', data.indPresenceMini],
+              ['Conversion adhésion', data.indConversion],
+              ['Note évaluation', data.indNote ? `${data.indNote}/10` : null],
+              ['% recommandation', data.indRecommandation ? `${data.indRecommandation}%` : null],
+              ['Indicateur 1', data.indSpe1],
+              ['Indicateur 2', data.indSpe2],
+            ].filter(([l]) => l),
           },
           {
             title: '6 & 7 · Orientations & Validation',
             rows: [
-              ['Échange Frank MORIZE', data.echFrank],
+              ['Échange Frank Morize', data.echFrank],
               ['Hors Petit-déj/Soirée', data.divHorsDej],
-              ['Créneau Mercredi', data.mercredi],
+              ['Dév. partenariats', data.devPartenariats],
+              ['Dév. réseaux', data.devReseaux],
+              ['Appui partenaires ext.', data.appuiPartenaires],
               ['Porteur (signature)', data.valPorteurNom],
               ['CRE (signature)', data.valCreNom],
               ['Date de signature', data.valSignatureDate],

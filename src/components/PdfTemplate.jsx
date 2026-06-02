@@ -1,8 +1,8 @@
 export default function PdfTemplate({ data }) {
   const piliers = [
-    data.pilierDefendre && 'Défendre la voix des patrons',
-    data.pilierGrandir && 'Faire grandir les dirigeants',
-    data.pilierAider && 'Aider les entreprises',
+    data.pilierDefendre && 'Représenter et défendre la voix patronale',
+    data.pilierGrandir && 'Faire grandir les dirigeants et les entreprises',
+    data.pilierAider && 'Rompre la solitude du dirigeant par le réseau, les collectifs et les mises en relation',
   ].filter(Boolean)
 
   const fmt = (v, fallback = '—') => (v && String(v).trim()) ? v : fallback
@@ -34,8 +34,8 @@ export default function PdfTemplate({ data }) {
         <Table rows={[
           ['Intitulé', <strong style={{ color: '#0F3057', fontSize: '14px' }}>{fmt(data.intitule)}</strong>],
           ['Pôle / Club', fmt(data.pole)],
-          ['Porteur·euse', fmt(data.porteur)],
-          ['CRE', fmt(data.cre)],
+          ['Présidence engagée', fmt(data.president)],
+          ['Chef de projet', fmt(data.chefProjet)],
           ['Date', fmt(data.date)],
           ['Lieu', fmt(data.lieu)],
           ['Priorité', <strong style={{ color: '#E63946' }}>{fmt(data.priorite)}</strong>],
@@ -51,6 +51,7 @@ export default function PdfTemplate({ data }) {
               {data.format === 'Autre' ? fmt(data.formatAutre) : fmt(data.format)}
             </span>
           </Row>
+          {data.duree && <Row label="Durée / horaires">{fmt(data.duree)}</Row>}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '10px' }}>
             <div>
               <Label>Q2 — Besoin adhérent</Label>
@@ -70,7 +71,7 @@ export default function PdfTemplate({ data }) {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
           <Table rows={[
             ['Profil dirigeant', fmt(data.profil)],
-            ['Effectif cible', fmt(data.effectif)],
+          ['Nbre de participants', fmt(data.nbParticipants)],
             ['Ratio (Adh. / Non-adh.)', `${fmt(data.ratioAdherents, '0')}% / ${Math.max(0, 100 - Number(data.ratioAdherents || 0))}%`],
           ]} />
           <div style={{ borderLeft: '1px solid #e2e8f0', paddingLeft: '12px' }}>
@@ -138,11 +139,12 @@ export default function PdfTemplate({ data }) {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
             <tbody>
               {[
-                ['Présence (min. / idéale)', `${fmt(data.indPresenceReelle, '?')} / ${fmt(data.indPresenceCible, '?')}`],
-                ['Conversion adhésion 30j', fmt(data.indConversion)],
-                ['NPS post-événement', `${fmt(data.indNps)} / 10`],
-                data.indSpe1Nom && [data.indSpe1Nom, fmt(data.indSpe1Seuil)],
-                data.indSpe2Nom && [data.indSpe2Nom, fmt(data.indSpe2Seuil)],
+                ['Présence mini visée', fmt(data.indPresenceMini)],
+                ['Conversion adhésion', fmt(data.indConversion)],
+                ['Note évaluation (/10)', fmt(data.indNote)],
+                ['% recommandation', data.indRecommandation ? `${data.indRecommandation}%` : '—'],
+                data.indSpe1 && ['Indicateur 1', data.indSpe1],
+                data.indSpe2 && ['Indicateur 2', data.indSpe2],
               ].filter(Boolean).map(([lbl, val], i) => (
                 <tr key={i} style={{ background: i % 2 === 0 ? '#f8fafc' : 'white', borderTop: '1px solid #e2e8f0' }}>
                   <td style={{ padding: '6px 8px', color: '#64748b', fontWeight: 600, fontSize: '11px' }}>{lbl}</td>
@@ -158,9 +160,11 @@ export default function PdfTemplate({ data }) {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
             <tbody>
               {[
-                ['Échange Frank MORIZE', data.echFrank === 'Oui' ? `Oui — ${fmt(data.echFrankModalite)}` : 'Non'],
-                ['Hors Petit-déj/Déj/Soirée', data.divHorsDej === 'Oui' ? `Oui — ${fmt(data.divHorsDejPrec)}` : 'Non'],
-                ['Créneau Mercredi', data.mercredi === 'Oui' ? `Oui — ${fmt(data.mercrediJour)}` : 'Non'],
+                ['Format d\'échange avec Frank Morize', data.echFrank],
+                ['Diversification hors petit-déj/déj/soirée', data.divHorsDej],
+                ['Développement de partenariats', data.devPartenariats],
+                ['Développement des relations réseaux', data.devReseaux],
+                ['Appui partenaires / réseaux externes', data.appuiPartenaires],
               ].map(([lbl, val], i) => (
                 <tr key={i} style={{ background: i % 2 === 0 ? '#f8fafc' : 'white', borderTop: '1px solid #e2e8f0' }}>
                   <td style={{ padding: '6px 8px', color: '#64748b', fontWeight: 600, fontSize: '11px' }}>{lbl}</td>

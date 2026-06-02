@@ -20,11 +20,11 @@ export default function Step1Identification({ data, onChange, showErrors = false
         <FormGroup label="Pôle / Club porteur" required>
           <Input name="pole" value={data.pole} onChange={onChange} placeholder="Ex : Pôle Industrie" error={showErrors && !data.pole?.trim()} />
         </FormGroup>
-        <FormGroup label="Porteur·euse engagé·e" required>
-          <Input name="porteur" value={data.porteur} onChange={onChange} placeholder="Nom du porteur" error={showErrors && !data.porteur?.trim()} />
+        <FormGroup label="Présidence engagée" required>
+          <Input name="president" value={data.president} onChange={onChange} placeholder="Nom du·de la président·e de club" error={showErrors && !data.president?.trim()} />
         </FormGroup>
-        <FormGroup label="CRE responsable" required>
-          <Input name="cre" value={data.cre} onChange={onChange} placeholder="Nom du/de la CRE" error={showErrors && !data.cre?.trim()} />
+        <FormGroup label="Chef de projet" required>
+          <Input name="chefProjet" value={data.chefProjet} onChange={onChange} placeholder="Nom du/de la CRE" error={showErrors && !data.chefProjet?.trim()} />
         </FormGroup>
         <FormGroup label="Date / période envisagée" required>
           <Input name="date" value={data.date} onChange={onChange} placeholder="Ex : Mi-octobre 2026" error={showErrors && !data.date?.trim()} />

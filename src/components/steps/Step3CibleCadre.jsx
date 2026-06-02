@@ -17,8 +17,8 @@ export default function Step3CibleCadre({ data, onChange, showErrors = false }) 
           <FormGroup label="Profil dirigeant" required>
             <Input name="profil" value={data.profil} onChange={onChange} placeholder="Ex : PME Industrielles" error={showErrors && !data.profil?.trim()} />
           </FormGroup>
-          <FormGroup label="Effectif cible (min)" required>
-            <Input name="effectif" type="number" min="0" value={data.effectif} onChange={onChange} placeholder="Ex : 30" error={showErrors && !data.effectif} />
+          <FormGroup label="Nbre de participants" required>
+            <Input name="nbParticipants" type="number" min="0" value={data.nbParticipants} onChange={onChange} placeholder="Ex : 35" error={showErrors && !data.nbParticipants} />
           </FormGroup>
           <FormGroup label="Ratio Adhérents %" required>
             <div className="flex items-center gap-2">
@@ -89,9 +89,9 @@ export default function Step3CibleCadre({ data, onChange, showErrors = false }) 
       {/* Q6 */}
       <FormGroup label="Q6. Pilier CPME servi" required hint="Au moins un">
         <div className={`flex flex-col gap-2 mt-1 rounded-xl transition-all ${showErrors && !data.pilierDefendre && !data.pilierGrandir && !data.pilierAider ? 'p-3 border border-cpme-red bg-red-50' : ''}`}>
-          <Checkbox name="pilierDefendre" checked={data.pilierDefendre} onChange={onChange} label="Défendre la voix des patrons" />
-          <Checkbox name="pilierGrandir" checked={data.pilierGrandir} onChange={onChange} label="Faire grandir les dirigeants" />
-          <Checkbox name="pilierAider" checked={data.pilierAider} onChange={onChange} label="Aider les entreprises" />
+          <Checkbox name="pilierDefendre" checked={data.pilierDefendre} onChange={onChange} label="Représenter et défendre la voix patronale" />
+          <Checkbox name="pilierGrandir" checked={data.pilierGrandir} onChange={onChange} label="Faire grandir les dirigeants et les entreprises" />
+          <Checkbox name="pilierAider" checked={data.pilierAider} onChange={onChange} label="Rompre la solitude du dirigeant par le réseau, les collectifs et les mises en relation" />
         </div>
         {showErrors && !data.pilierDefendre && !data.pilierGrandir && !data.pilierAider && (
           <p className="text-xs text-cpme-red mt-1 font-medium">Cochez au moins un pilier CPME.</p>
