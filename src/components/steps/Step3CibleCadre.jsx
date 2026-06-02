@@ -12,7 +12,7 @@ export default function Step3CibleCadre({ data, onChange, showErrors = false }) 
           <Users size={16} className="text-cpme-lightblue" />
           Q4. Qui doit être présent et combien ?
         </h3>
-        <p className="text-xs text-slate-500 mb-4">Profil dirigeant, effectif cible, ratio adhérents / non-adhérents</p>
+        <p className="text-xs text-slate-500 mb-4">Profil dirigeant, nbre de participants</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <FormGroup label="Profil dirigeant" required>
             <Input name="profil" value={data.profil} onChange={onChange} placeholder="Ex : PME Industrielles" error={showErrors && !data.profil?.trim()} />
